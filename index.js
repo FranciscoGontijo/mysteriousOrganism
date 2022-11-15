@@ -13,3 +13,13 @@ const returnRandBase = () => {
     return newStrand
   }
   
+  // create a function to factory a object
+  function pAequorFactory(number, array) {
+    return {
+        _specimenNum: number,
+        _dna: array,
+        mutate() {
+            this._dna[Math.floor(Math.random() * this._dna.length)] = returnRandBase();
+        }
+    }
+  }
