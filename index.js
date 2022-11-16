@@ -44,20 +44,30 @@ function pAequorFactory(number, array) {
                     count++;
                 }
             } 
-            console.log(count);
             let percent = count / this._dna.length;
-            console.log(percent);
             return (percent >= 0.6)
         }
     }
 }
 
 
-let test = mockUpStrand();
-let test4 = mockUpStrand();
-let test2 = pAequorFactory(1, test);
-let test3 = pAequorFactory(2, test4);
-// console.log(test2);
-// console.log(test3);
-// console.log(test2.compareDNA(test3));
-console.log(test2.willLikelySurvive());
+
+const creatingPAequors = (numberOfAequors) => {
+    let pAequors = [];
+    let i = 1;
+    do {
+        const strand = mockUpStrand();
+        const pAequor = pAequorFactory(i, strand);
+        do {
+            pAequor.mutate()
+        } while (!pAequor.willLikelySurvive());
+        i++;
+        pAequors.push(pAequor);
+    } while (i < numberOfAequors);
+    return pAequors
+}
+
+pAqueors = creatingPAequors(30);
+console.log(pAqueors);
+
+
