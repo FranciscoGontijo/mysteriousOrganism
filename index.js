@@ -20,7 +20,6 @@ function pAequorFactory(number, array) {
         _dna: array,
         mutate() {
             const index = (Math.floor(Math.random() * this._dna.length));
-            console.log(index);
             let newBase = '';
             do {
                 newBase = returnRandBase();
@@ -35,15 +34,30 @@ function pAequorFactory(number, array) {
                     count++
                 }
             }
-            let percent = (count / pAequor.length) * 100;
+            let percent = (Math.round((count / pAequor._dna.length) * 10000)/100);
             console.log(`specimen #${this._specimenNum} and specimen #${pAequor._specimenNum} have ${percent}% DNA in common`);
+        },
+        willLikelySurvive() {
+            let count = 0;
+            for (const base of this._dna) {
+                if (base === 'C' || base === 'G') {
+                    count++;
+                }
+            } 
+            console.log(count);
+            let percent = count / this._dna.length;
+            console.log(percent);
+            return (percent >= 0.6)
         }
     }
 }
 
 
 let test = mockUpStrand();
-console.log(test);
+let test4 = mockUpStrand();
 let test2 = pAequorFactory(1, test);
-console.log(test2);
-console.log(test2.mutate());
+let test3 = pAequorFactory(2, test4);
+// console.log(test2);
+// console.log(test3);
+// console.log(test2.compareDNA(test3));
+console.log(test2.willLikelySurvive());
