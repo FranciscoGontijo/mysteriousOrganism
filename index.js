@@ -19,9 +19,21 @@ function pAequorFactory(number, array) {
         _specimenNum: number,
         _dna: array,
         mutate() {
-            this._dna[Math.floor(Math.random() * this._dna.length)] = returnRandBase();
+            const index = (Math.floor(Math.random() * this._dna.length));
+            console.log(index);
+            let newBase = '';
+            do {
+                newBase = returnRandBase();
+            } while (this._dna[index] === newBase);
+            this._dna[index] = newBase;
+            return this._dna;
         }
     }
 }
 
 
+let test = mockUpStrand();
+console.log(test);
+let test2 = pAequorFactory(1, test);
+console.log(test2);
+console.log(test2.mutate());
